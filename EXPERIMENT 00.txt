@@ -1,0 +1,146 @@
+Microsoft Windows [Version 10.0.26200.7623]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\OMJI>cd../../
+
+C:\>cd xampp/mysql/bin
+
+C:\xampp\mysql\bin>mysql -uroot
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+5 rows in set (0.015 sec)
+
+MariaDB [(none)]> create database company;
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use company;
+Database changed
+
+MariaDB [company]> create table employee(
+    -> EMPNO INT(4) PRIMARY KEY,
+    -> ENAME VARCHAR(20) NOT NULL,
+    -> JOB VARCHAR(20),
+    -> MGR INT(4),
+    -> HIREDATE Date,
+    -> SAL INT(10),
+    -> COMM INT(7),
+    -> DEPTNO INT(2)
+    -> );
+Query OK, 0 rows affected (0.040 sec)
+
+MariaDB [company]> create table department(
+    -> DEPTNO INT(2) PRIMARY KEY,
+    -> DNAME VARCHAR(15) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.051 sec)
+
+MariaDB [company]> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| EMPNO    | int(4)      | NO   | PRI | NULL    |       |
+| ENAME    | varchar(20) | NO   |     | NULL    |       |
+| JOB      | varchar(20) | YES  |     | NULL    |       |
+| MGR      | int(4)      | YES  |     | NULL    |       |
+| HIREDATE | date        | YES  |     | NULL    |       |
+| SAL      | int(10)     | YES  |     | NULL    |       |
+| COMM     | int(7)      | YES  |     | NULL    |       |
+| DEPTNO   | int(2)      | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.030 sec)
+
+MariaDB [company]> desc department;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| DEPTNO | int(2)      | NO   | PRI | NULL    |       |
+| DNAME  | varchar(15) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+;
+
+MariaDB [company]>
+
+
+MariaDB [company]> select * from department;
++--------+------------+
+| DEPTNO | DNAME      |
++--------+------------+
+|     10 | Research   |
+|     20 | Accounting |
+|     30 | Sales      |
+|     40 | operator   |
++--------+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [(none)]> use company;
+Database changed
+MariaDB [company]> insert into employee
+    -> (EMPNO,ENAME,JOB,MGR,HIREDATE,SAL,COMM,DEPTNO)
+    -> values
+    -> (7369,'SMITH','CLERK',7902,'80-12-17',800,NULL,20),
+    -> (7499,'ALLEN','SALESMAN',7698,'81-02-20',1600,300,30),
+    -> (7521,'WARD','SALESMAN',7698,'81-02-22',1600,300,30),
+    -> (7566,'JONES','MANAGER',7839,'81-04-02',2975,NULL,20),
+    -> (7654,'MARTIN','SALESMAN',7698,'81-09-28',1250,1400,30),
+    -> (7698,'BLAKE','MANAGER',7839,'81-05-01',2850,NULL,30),
+    -> (7782,'CLARK','MANAGER',7839,'81-07-09',2450,NULL,20),
+    -> (7788,'SCOTT','ANALYST',7566,'82-12-09',3000,NULL,40),
+    -> (7839,'KING','PRESIDENT',NULL,'81-11-17',5000,NULL,20),
+    -> (7844,'TURNER','SALESMAN',7698,'81-09-08',1500,0,30),
+    -> (7876,'ADAMS','CLERK',7788,'83-01-12',1100,NULL,20),
+    -> (7900,'JAMES','CLERK',7698,'81-12-03',950,NULL,30),
+    -> (7902,'FORD','ANALYST',7566,'81-12-03',3000,NULL,20),
+    -> (7934,'MILLER','CLERK',7782,'82-01-23',1300,NULL,10);
+Query OK, 14 rows affected (0.006 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+MariaDB [company]> SELECT * FROM EMPLOYEE
+    -> ;
++-------+--------+-----------+------+------------+------+------+--------+
+| EMPNO | ENAME  | JOB       | MGR  | HIREDATE   | SAL  | COMM | DEPTNO |
++-------+--------+-----------+------+------------+------+------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800 | NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600 |  300 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1600 |  300 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975 | NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250 | 1400 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850 | NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-07-09 | 2450 | NULL |     20 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000 | NULL |     40 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000 | NULL |     20 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500 |    0 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100 | NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950 | NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000 | NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300 | NULL |     10 |
++-------+--------+-----------+------+------------+------+------+--------+
+14 rows in set (0.001 sec)
